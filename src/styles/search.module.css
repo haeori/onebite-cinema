@@ -1,0 +1,47 @@
+.searchContainer {
+    padding: 1rem 0;
+}
+
+.searchTitle {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: inherit;
+}
+
+.resultCount {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 1.5rem;
+}
+
+@media (prefers-color-scheme: dark) {
+    .resultCount {
+        color: #aaa;
+    }
+}
+
+.movieGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1rem;
+}
+/* 큰 화면에서도 5줄까지만 출력 */
+@media (min-width: 1000px) {
+    .movieGrid {
+        grid-template-columns: repeat(5, 1fr);
+    }
+}
+
+.noResult {
+    text-align: center;
+    font-size: 1.125rem;
+    color: #999;
+    padding: 3rem 0;
+}
+
+@media (prefers-color-scheme: dark) {
+    .noResult {
+        color: #666;
+    }
+}
