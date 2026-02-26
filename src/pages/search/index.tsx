@@ -1,8 +1,11 @@
-import movieData from '@/mock/dummy.json';
-import { MovieItem } from '@/components/movie/movie-item';
-import { SearchbarLayout } from '@/components/layouts/searchbar-layout';
 import { ReactNode } from 'react';
+
 import style from '@/styles/search.module.css';
+
+import movieData from '@/mock/dummy.json';
+
+import { SearchbarLayout } from '@/components/layouts/searchbar-layout';
+import { MovieItem } from '@/components/movie/movie-item';
 
 const SearchPage = () => {
   return (

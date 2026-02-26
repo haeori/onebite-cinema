@@ -1,6 +1,7 @@
 import { ReactNode, useState } from 'react';
-import style from '@/styles/searchbar-layout.module.css';
 import { useRouter } from 'next/router';
+
+import style from '@/styles/searchbar-layout.module.css';
 
 type SearchbarLayoutProps = {
   children: ReactNode;

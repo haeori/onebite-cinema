@@ -1,6 +1,9 @@
 import style from '@/styles/cinema-home.module.css';
-import movieData from '@/mock/dummy.json';
+
 import { MovieInfo } from '@/types/movie-types';
+
+import movieData from '@/mock/dummy.json';
+
 import { MovieItem } from '@/components/movie/movie-item';
 
 export const CinemaHome = () => {

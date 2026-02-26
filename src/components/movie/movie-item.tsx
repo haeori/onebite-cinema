@@ -1,6 +1,8 @@
-import { MovieInfo } from '@/types/movie-types';
-import style from '@/styles/movie-item.module.css';
 import { useRouter } from 'next/router';
+
+import style from '@/styles/movie-item.module.css';
+
+import { MovieInfo } from '@/types/movie-types';
 
 type MovieItemProps = {
   movie: MovieInfo;

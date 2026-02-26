@@ -1,5 +1,6 @@
-import { MovieInfo } from '@/types/movie-types';
 import style from '@/styles/movie-detail.module.css';
+
+import { MovieInfo } from '@/types/movie-types';
 
 type MovieDetailProps = {
   movie: MovieInfo;
