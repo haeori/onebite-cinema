@@ -1,0 +1,28 @@
+.container {
+    padding-top: 4rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+.siteTitle {
+    color: #6b1fa8;
+    font-weight: 800;
+    font-size: 1.5rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    background-color: white;
+    padding: 1rem;
+    z-index: 100;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+@media (prefers-color-scheme: dark) {
+    .siteTitle {
+        background-color: black;
+    }
+}
