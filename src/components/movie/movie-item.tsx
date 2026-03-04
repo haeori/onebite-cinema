@@ -9,7 +9,9 @@ type MovieItemProps = {
 };
 
 export const MovieItem = ({ movie }: MovieItemProps) => {
-
-  // TODO 추후 실데이터 연결
-  return <Link href={`/movie/${movie.id}`}><img className={style.moviePoster} src={movie.posterImgUrl} alt={movie.title} /></Link>;
+  return (
+    <Link href={`/movie/${movie.id}`}>
+      <img className={style.moviePoster} src={movie.posterImgUrl} alt={movie.title} />
+    </Link>
+  );
 };
