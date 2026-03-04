@@ -3,11 +3,19 @@ import { MovieDetail } from '@/components/movie/movie-detail';
 import { GetStaticPropsContext, InferGetStaticPropsType } from 'next';
 import { useRouter } from 'next/router';
 
-import { fetchMovieDetail } from '@/pages/api/movie';
+import { fetchMovieDetail, fetchMovieList } from '@/pages/api/movie';
+import { MovieInfo } from '@/types/movie-types';
 
 export const getStaticPaths = async () => {
+  // 모든 영화 ID를 가져와 동적 paths 생성
+  const movies = await fetchMovieList();
+
+  const paths = movies.map((movie : MovieInfo) => ({
+    params: { id: String(movie.id) }
+  }));
+
   return {
-    paths: [{ params: { id: '1' }}, {params: { id: '2'}}],
+    paths,
     fallback: true,
   };
 };
