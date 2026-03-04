@@ -9,11 +9,11 @@ type GlobalLayoutProps = {
 
 export const GlobalLayout = ({ children }: GlobalLayoutProps) => {
   return (
-    <Link href="/">
-      <div className={style.container}>
+    <div className={style.container}>
+      <Link href="/">
         <div className={style.siteTitle}>ONEBITE CINEMA</div>
-        <div className={style.content}>{children}</div>
-      </div>
-    </Link>
+      </Link>
+      <div className={style.content}>{children}</div>
+    </div>
   );
 };

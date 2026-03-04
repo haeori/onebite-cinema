@@ -1,3 +1,5 @@
+import Head from 'next/head';
+
 import { MovieDetail } from '@/components/movie/movie-detail';
 
 import { GetStaticPropsContext, InferGetStaticPropsType } from 'next';
@@ -10,8 +12,8 @@ export const getStaticPaths = async () => {
   // 모든 영화 ID를 가져와 동적 paths 생성
   const movies = await fetchMovieList();
 
-  const paths = movies.map((movie : MovieInfo) => ({
-    params: { id: String(movie.id) }
+  const paths = movies.map((movie: MovieInfo) => ({
+    params: { id: String(movie.id) },
   }));
 
   return {
@@ -36,12 +38,22 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
 };
 
 // 영화 상세 페이지
-const MoviePage = ({ movie } : InferGetStaticPropsType<typeof getStaticProps>) => {
+const MoviePage = ({ movie }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const router = useRouter();
 
   if (router.isFallback) {
     // TODO 로딩 컴포넌트 적용
-    return <div>로딩 중입니다...</div>;
+    return (
+      <>
+        <Head>
+          <title>한입시네마</title>
+          <meta property="og:image" content="/thumbnail.png" />
+          <meta property="og:title" content="한입시네마" />
+          <meta property="og:description" content="한입시네마에서 다채로운 영화들을 만나보세요" />
+        </Head>
+        <div>로딩 중입니다...</div>
+      </>
+    );
   }
 
   return <MovieDetail movie={movie} />;
