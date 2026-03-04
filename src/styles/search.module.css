@@ -34,14 +34,18 @@
 }
 
 .noResult {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 300px;
     text-align: center;
     font-size: 1.125rem;
-    color: #999;
-    padding: 3rem 0;
+    font-weight: 600;
+    color: #6b1fa8;
 }
 
 @media (prefers-color-scheme: dark) {
     .noResult {
-        color: #666;
+        color: #a855f7;
     }
 }

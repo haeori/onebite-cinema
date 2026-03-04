@@ -18,7 +18,7 @@ export const getStaticPaths = async () => {
 
   return {
     paths,
-    fallback: true,
+    fallback: false,
   };
 };
 
@@ -42,7 +42,6 @@ const MoviePage = ({ movie }: InferGetStaticPropsType<typeof getStaticProps>) =>
   const router = useRouter();
 
   if (router.isFallback) {
-    // TODO 로딩 컴포넌트 적용
     return (
       <>
         <Head>
@@ -51,7 +50,6 @@ const MoviePage = ({ movie }: InferGetStaticPropsType<typeof getStaticProps>) =>
           <meta property="og:title" content="한입시네마" />
           <meta property="og:description" content="한입시네마에서 다채로운 영화들을 만나보세요" />
         </Head>
-        <div>로딩 중입니다...</div>
       </>
     );
   }
