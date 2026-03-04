@@ -1,3 +1,5 @@
+import Head from 'next/head';
+
 import { ReactNode, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 
@@ -11,30 +13,38 @@ import { MovieInfo } from '@/types/movie-types';
 
 const SearchPage = () => {
   const router = useRouter();
-  const  q  = router.query.q as string;
+  const q = router.query.q as string;
 
   const [searchedMovies, setSearchedMovies] = useState<MovieInfo[]>([]);
 
   const fetchSearchData = async () => {
-    const data = await fetchSearchMovies(q)
-    setSearchedMovies(data)
-  }
+    const data = await fetchSearchMovies(q);
+    setSearchedMovies(data);
+  };
 
   useEffect(() => {
     if (q) {
-      fetchSearchData()
+      fetchSearchData();
     }
-  }, [q])
+  }, [q]);
 
   return (
-    <div className={style.searchContainer}>
-      <h3 className={style.searchTitle}>검색 결과</h3>
-      <div className={style.movieGrid}>
-        {searchedMovies?.map(movie => (
-          <MovieItem key={movie.id} movie={movie} />
-        ))}
+    <>
+      <Head>
+        <title>한입시네마 - 검색결과</title>
+        <meta property="og:image" content="/thumbnail.png" />
+        <meta property="og:title" content="한입시네마 - 검색결과" />
+        <meta property="og:description" content="한입시네마에서 다채로운 영화들을 만나보세요" />
+      </Head>
+      <div className={style.searchContainer}>
+        <h3 className={style.searchTitle}>검색 결과</h3>
+        <div className={style.movieGrid}>
+          {searchedMovies?.map(movie => (
+            <MovieItem key={movie.id} movie={movie} />
+          ))}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
