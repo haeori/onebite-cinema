@@ -9,24 +9,29 @@ import { fetchSearchMovies } from '@/pages/api/movie';
 
 import { SearchbarLayout } from '@/components/layouts/searchbar-layout';
 import { MovieItem } from '@/components/movie/movie-item';
+import { Loading } from '@/components/common/loading';
 import { MovieInfo } from '@/types/movie-types';
+import { isArrayEmpty, isArrayNotEmpty, isStringNotEmpty } from '@/utils/movie-utils';
 
 const SearchPage = () => {
   const router = useRouter();
-  const q = router.query.q as string;
+  const query = router.query.q as string;
 
   const [searchedMovies, setSearchedMovies] = useState<MovieInfo[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const fetchSearchData = async () => {
-    const data = await fetchSearchMovies(q);
+    setIsLoading(true);
+    const data = await fetchSearchMovies(query);
     setSearchedMovies(data);
+    setIsLoading(false);
   };
 
   useEffect(() => {
-    if (q) {
+    if (query) {
       fetchSearchData();
     }
-  }, [q]);
+  }, [query]);
 
   return (
     <>
@@ -38,11 +43,16 @@ const SearchPage = () => {
       </Head>
       <div className={style.searchContainer}>
         <h3 className={style.searchTitle}>검색 결과</h3>
-        <div className={style.movieGrid}>
-          {searchedMovies?.map(movie => (
-            <MovieItem key={movie.id} movie={movie} />
-          ))}
-        </div>
+
+        {isLoading ? (
+          <Loading />
+        ) : (
+          <>
+            <div className={style.movieGrid}>{isArrayNotEmpty(searchedMovies) && searchedMovies.map(movie => <MovieItem key={movie.id} movie={movie} />)}</div>
+
+            {isStringNotEmpty(query) && isArrayEmpty(searchedMovies) && <div className={style.noResult}>검색 결과가 없습니다</div>}
+          </>
+        )}
       </div>
     </>
   );

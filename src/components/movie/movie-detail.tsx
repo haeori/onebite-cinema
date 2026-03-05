@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Link from 'next/link';
 
 import style from '@/styles/movie-detail.module.css';
 
@@ -52,6 +53,13 @@ export const MovieDetail = ({ movie }: MovieDetailProps) => {
 
           {/* 설명 */}
           <div className={style.description}>{movie.description}</div>
+
+          {/* 영화 목록으로 돌아가기 버튼 */}
+          <div className={style.buttonContainer}>
+            <Link href="/" className={style.backButton}>
+              영화 목록으로 돌아가기
+            </Link>
+          </div>
         </div>
       </div>
     </>

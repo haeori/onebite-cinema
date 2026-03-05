@@ -113,3 +113,46 @@
         color: #ddd;
     }
 }
+
+.buttonContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.backButton {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.875rem 1.75rem;
+    background: linear-gradient(135deg, #6b1fa8 0%, #8b3fc8 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(107, 31, 168, 0.3);
+}
+
+.backButton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(107, 31, 168, 0.4);
+}
+
+.backButton:active {
+    transform: translateY(0);
+}
+
+@media (prefers-color-scheme: dark) {
+    .backButton {
+        background: linear-gradient(135deg, #a855f7 0%, #c084fc 100%);
+        box-shadow: 0 4px 12px rgba(168, 85, 247, 0.3);
+    }
+
+    .backButton:hover {
+        box-shadow: 0 6px 20px rgba(168, 85, 247, 0.4);
+    }
+}
