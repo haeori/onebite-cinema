@@ -1,7 +1,7 @@
 const API_URL = 'https://onebite-cinema-server-jjui858kb-haeoris-projects.vercel.app';
 
 export const fetchMovieList = async () => {
-  const url = `${API_URL}/movie`
+  const url = `${API_URL}/movie`;
 
   try {
     const res = await fetch(url);
@@ -15,10 +15,10 @@ export const fetchMovieList = async () => {
     console.error(`Error fetching movie list:`, e);
     return [];
   }
-}
+};
 
-export const fetchMovieDetail = async (id: string)  => {
-  const url = `${API_URL}/movie/${id}`
+export const fetchMovieDetail = async (id: string) => {
+  const url = `${API_URL}/movie/${id}`;
 
   try {
     const res = await fetch(url);
@@ -32,10 +32,11 @@ export const fetchMovieDetail = async (id: string)  => {
     console.error(`Error fetching movie ${id}:`, e);
     return null;
   }
-}
+};
 
 export const fetchSearchMovies = async (query: string) => {
-  const url = `${API_URL}/movie/search?q=${query}`;
+  const encodedQuery = encodeURIComponent(query);
+  const url = `${API_URL}/movie/search?q=${encodedQuery}`;
 
   const res = await fetch(url);
 
@@ -44,10 +45,10 @@ export const fetchSearchMovies = async (query: string) => {
   }
 
   return res.json();
-}
+};
 
 export const fetchRandomMovies = async () => {
-  const url = `${API_URL}/movie/random`
+  const url = `${API_URL}/movie/random`;
 
   try {
     const res = await fetch(url);
@@ -61,4 +62,4 @@ export const fetchRandomMovies = async () => {
     console.error(`Error fetching movies ":`, e);
     return [];
   }
-}
+};
