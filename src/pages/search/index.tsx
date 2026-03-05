@@ -1,7 +1,8 @@
 import Head from 'next/head';
 
-import { ReactNode, useEffect, useState } from 'react';
+import { ReactNode } from 'react';
 import { useRouter } from 'next/router';
+import { useQuery } from '@tanstack/react-query';
 
 import style from '@/styles/search.module.css';
 
@@ -17,21 +18,15 @@ const SearchPage = () => {
   const router = useRouter();
   const query = router.query.q as string;
 
-  const [searchedMovies, setSearchedMovies] = useState<MovieInfo[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
-
-  const fetchSearchData = async () => {
-    setIsLoading(true);
-    const data = await fetchSearchMovies(query);
-    setSearchedMovies(data);
-    setIsLoading(false);
-  };
-
-  useEffect(() => {
-    if (query) {
-      fetchSearchData();
-    }
-  }, [query]);
+  const {
+    data: searchedMovies = [],
+    isLoading,
+    isError,
+  } = useQuery<MovieInfo[]>({
+    queryKey: ['searchMovies', query],
+    queryFn: () => fetchSearchMovies(query),
+    enabled: !!query,
+  });
 
   return (
     <>
@@ -46,6 +41,11 @@ const SearchPage = () => {
 
         {isLoading ? (
           <Loading />
+        ) : isError ? (
+          <div className={style.error}>
+            <p>오류가 발생했습니다.</p>
+            <p>잠시 후 다시 시도해주세요.</p>
+          </div>
         ) : (
           <>
             <div className={style.movieGrid}>{isArrayNotEmpty(searchedMovies) && searchedMovies.map(movie => <MovieItem key={movie.id} movie={movie} />)}</div>
