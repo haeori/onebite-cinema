@@ -51,3 +51,11 @@
     color: #a855f7;
   }
 }
+
+/* 애니메이션 줄이기 설정 (접근성) */
+@media (prefers-reduced-motion: reduce) {
+  .spinner,
+  .text {
+    animation: none;
+  }
+}

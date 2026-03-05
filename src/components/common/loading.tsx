@@ -2,9 +2,9 @@ import style from './loading.module.css';
 
 export const Loading = () => {
   return (
-    <div className={style.container}>
-      <div className={style.spinner}></div>
-      <p className={style.text}>Loading...</p>
+    <div className={style.container} role="status" aria-live="polite" aria-busy="true">
+      <div className={style.spinner} aria-hidden="true"></div>
+      <p className={style.text}>조회 중입니다...</p>
     </div>
   );
 };
