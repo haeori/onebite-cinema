@@ -1,7 +1,8 @@
 import Head from 'next/head';
 
-import { ReactNode, useEffect, useState } from 'react';
+import { ReactNode } from 'react';
 import { useRouter } from 'next/router';
+import { useQuery } from '@tanstack/react-query';
 
 import style from '@/styles/search.module.css';
 
@@ -17,21 +18,11 @@ const SearchPage = () => {
   const router = useRouter();
   const query = router.query.q as string;
 
-  const [searchedMovies, setSearchedMovies] = useState<MovieInfo[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
-
-  const fetchSearchData = async () => {
-    setIsLoading(true);
-    const data = await fetchSearchMovies(query);
-    setSearchedMovies(data);
-    setIsLoading(false);
-  };
-
-  useEffect(() => {
-    if (query) {
-      fetchSearchData();
-    }
-  }, [query]);
+  const { data: searchedMovies = [], isLoading } = useQuery<MovieInfo[]>({
+    queryKey: ['searchMovies', query],
+    queryFn: () => fetchSearchMovies(query),
+    enabled: !!query,
+  });
 
   return (
     <>
