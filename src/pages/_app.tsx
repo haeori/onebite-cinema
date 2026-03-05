@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
 import type { AppProps } from 'next/app';
+import NextNProgress from 'nextjs-progressbar';
 
 import '@/styles/globals.css';
 
@@ -14,6 +15,7 @@ export default function App({ Component, pageProps }: AppProps & { Component: La
   return (
     <>
       <GlobalLayout>{getLayout(<Component {...pageProps} />)}</GlobalLayout>
+      <NextNProgress color="#6b1fa8" height={4} options={{ showSpinner: false }} />
     </>
   );
 }
