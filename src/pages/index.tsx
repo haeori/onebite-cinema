@@ -7,18 +7,18 @@ import { CinemaHome } from '@/components/cinema-home';
 import { fetchMovieList, fetchRandomMovies } from '@/pages/api/movie';
 
 export const getStaticProps: GetStaticProps = async () => {
-  const movies = await fetchMovieList();
-  const recommendMovies = await fetchRandomMovies();
+  const [movies, recommendMovies] = await Promise.all([fetchMovieList(), fetchRandomMovies()]);
 
   return {
     props: {
       movies,
-      recommendMovies
+      recommendMovies,
     },
-  }
+    revalidate: 3, // 3초마다 추천영화 재생성
+  };
 };
 
-export default function HomePage({movies, recommendMovies}: InferGetStaticPropsType<typeof getStaticProps>) {
+export default function HomePage({ movies, recommendMovies }: InferGetStaticPropsType<typeof getStaticProps>) {
   return <CinemaHome movies={movies} recommendMovies={recommendMovies} />;
 }
 
