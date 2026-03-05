@@ -35,20 +35,15 @@ export const fetchMovieDetail = async (id: string)  => {
 }
 
 export const fetchSearchMovies = async (query: string) => {
-  const url = `${API_URL}/movie/search?q=${query}`
+  const url = `${API_URL}/movie/search?q=${query}`;
 
-  try {
-    const res = await fetch(url);
+  const res = await fetch(url);
 
-    if (!res.ok) {
-      throw new Error(`Failed to search movies: ${res.status}`);
-    }
-
-    return res.json();
-  } catch (e) {
-    console.error(`Error searching movies with query "${query}":`, e);
-    return [];
+  if (!res.ok) {
+    throw new Error(`Failed to search movies: ${res.status}`);
   }
+
+  return res.json();
 }
 
 export const fetchRandomMovies = async () => {

@@ -18,7 +18,11 @@ const SearchPage = () => {
   const router = useRouter();
   const query = router.query.q as string;
 
-  const { data: searchedMovies = [], isLoading } = useQuery<MovieInfo[]>({
+  const {
+    data: searchedMovies = [],
+    isLoading,
+    isError,
+  } = useQuery<MovieInfo[]>({
     queryKey: ['searchMovies', query],
     queryFn: () => fetchSearchMovies(query),
     enabled: !!query,
@@ -37,6 +41,11 @@ const SearchPage = () => {
 
         {isLoading ? (
           <Loading />
+        ) : isError ? (
+          <div className={style.error}>
+            <p>오류가 발생했습니다.</p>
+            <p>잠시 후 다시 시도해주세요.</p>
+          </div>
         ) : (
           <>
             <div className={style.movieGrid}>{isArrayNotEmpty(searchedMovies) && searchedMovies.map(movie => <MovieItem key={movie.id} movie={movie} />)}</div>
